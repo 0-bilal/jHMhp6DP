@@ -1,0 +1,298 @@
+:root {
+    --bg: linear-gradient(180deg, #0D0D1A 0%, #1C1C2E 100%);
+    --card: rgba(46, 46, 72, 0.85);
+    --text: #E0E0E0;
+    --text-secondary: #9A9AA1;
+    --accent-primary: #4A6FA5;
+    --accent-romantic: #6C63FF;
+    --accent-gold: #FFD700;
+    --button: #2E2E48;
+    --button-hover: #3F3F5E;
+    --shadow: rgba(0, 0, 0, 0.6);
+    --star-color: #FFFFFF;
+    --star-glow: #4A6FA5;
+    --border: rgba(106, 99, 255, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* خلفية النجوم الحزينة */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    background: var(--star-color);
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: sadTwinkle 4s infinite ease-in-out;
+}
+
+.star.small {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 4px var(--star-color);
+}
+
+.star.medium {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 8px var(--star-color);
+}
+
+.star.large {
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 15px var(--star-color), 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes sadTwinkle {
+    0%, 100% { opacity: 0.6; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+.falling-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--star-color);
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall 8s infinite ease-in;
+    box-shadow: 0 0 8px var(--star-color);
+}
+
+@keyframes fall {
+    0% {
+        opacity: 0;
+        transform: translateX(0) translateY(-50px);
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(50px) translateY(150px);
+    }
+}
+
+.container {
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text);
+    text-shadow: 2px 2px 8px rgba(106, 99, 255, 0.4);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.card {
+    background: var(--card);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px var(--shadow);
+    border: 1px solid var(--border);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.time-unit {
+    text-align: center;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.time-unit:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(106, 99, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(106, 99, 255, 0.2);
+}
+
+.time-value {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', monospace;
+}
+
+.time-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.end-date {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-romantic));
+    border-radius: 12px;
+    color: var(--text);
+    margin-top: 1.5rem;
+    border: 1px solid rgba(106, 99, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(74, 111, 165, 0.3);
+}
+
+.end-date h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.end-date p {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+.story-message {
+    text-align: center;
+    padding: 1.25rem;
+    margin-top: 1rem;
+    background: rgba(46, 46, 72, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(106, 99, 255, 0.2);
+    color: var(--text);
+}
+
+.story-message p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+}
+
+.story-message p:last-child {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+}
+
+/* تحسينات للهاتف */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .time-grid {
+        gap: 0.8rem;
+    }
+    
+    .time-unit {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 1.25rem;
+    }
+    
+    .time-value {
+        font-size: 1.4rem;
+    }
+    
+    .time-label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .time-grid {
+        gap: 0.6rem;
+    }
+    
+    .time-unit {
+        padding: 0.8rem;
+    }
+    
+    .time-value {
+        font-size: 1.2rem;
+    }
+}
